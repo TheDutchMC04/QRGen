@@ -2,8 +2,6 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 import com.google.zxing.BarcodeFormat;
@@ -12,17 +10,11 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-//import net.sourceforge.barbecue.Barcode;
-//import net.sourceforge.barbecue.BarcodeException;
-//import net.sourceforge.barbecue.BarcodeFactory;
-//import net.sourceforge.barbecue.BarcodeImageHandler;
-//import net.sourceforge.barbecue.output.OutputException;
-
 public class main {
 
 	static String barcodeValue;
 	static String startAt;
-	static int atCurrentlyCount, atCurrently;
+	static int atCurrentlyCounter, atCurrently;
 	
 	static int height, width, amount;
 	
@@ -35,14 +27,12 @@ public class main {
 		
 		barcodeValue = mainGui.inputLinkValue;
 		startAt = mainGui.startNumberValue;
-		
 		height = Integer.parseInt(mainGui.height);
 		width = Integer.parseInt(mainGui.width);
+		amount = Integer.parseInt(mainGui.amountNumberValue) + Integer.parseInt(mainGui.startNumberValue);
+		atCurrently = atCurrently + Integer.parseInt(mainGui.startNumberValue);
 		
-		amount = Integer.parseInt(mainGui.amountNumberValue);
-		atCurrently = atCurrentlyCount + Integer.parseInt(startAt);
-		
-		while(amount >= atCurrentlyCount) {
+		while(amount >= atCurrently) {
 			if(mainGui.isEntered) {
 				try {
 					createQR(barcodeValue, width, height);
@@ -62,26 +52,11 @@ public class main {
 			}
 		}
 	}
-	
-	/*public static void outputtingBarcode() throws BarcodeException, IOException, OutputException {
-		Barcode barcode3;
-		barcode3 = BarcodeFactory.createPDF417(barcodeValue + "?=barcodeID:" + atCurrently);
-	    barcode3.setBarHeight(40);
-	    barcode3.setBarWidth(2);
-		barcode3.setResolution(500);
-		barcode3.setDrawingText(false);
-		BarcodeImageHandler.savePNG(barcode3, new File(Integer.toString(atCurrently) + ".png"));
-		
-		System.out.println("barcode " + atCurrently + " has been generated");
-		
-		atCurrently = atCurrently + 1;
-		atCurrentlyCount = atCurrentlyCount + 1;
-		System.out.println("Currently at: " + atCurrently);
-	}*/
-	 
+
+	@SuppressWarnings("deprecation")
 	public static void createQR(String text, int width, int height) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text + "?=senderID:" +atCurrently, BarcodeFormat.QR_CODE, width, height);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text + "?=senderID:" + atCurrently, BarcodeFormat.QR_CODE, width, height);
 		
 		try {
 		    String basePath = new File("").getAbsolutePath();
@@ -91,12 +66,23 @@ public class main {
 
 		    System.out.println("Barcode " + atCurrently + " has been generated");
 
-		    atCurrently = atCurrently + 1;
-		    atCurrentlyCount = atCurrentlyCount + 1;
+		    atCurrently++;
+		    atCurrentlyCounter++;
 		} catch (Exception e) {
-		    atCurrently = 0;
+		    e.printStackTrace();
 		}
-		System.out.println("Currently at: " + atCurrently);
+		System.out.println("Currently at: " + atCurrentlyCounter);
+	}
+	
+	public static void reset() {
+		barcodeValue = "";
+		startAt = "";
+		height = 0;
+		width = 0;
+		amount = 0;
+		atCurrently = 0;
+		atCurrentlyCounter = 0;
 		
+		System.out.println("Reset Complete");
 	}
 }

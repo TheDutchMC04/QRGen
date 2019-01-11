@@ -79,10 +79,14 @@ public class mainGui extends JFrame {
 		inputWidth.setBounds(250, 160, 50, 30);
 		frame.getContentPane().add(inputWidth);
 
-		//Button
+		//Buttons
 		JButton confirmButton = new JButton("Confirm");
 		confirmButton.setBounds(1, 200, 100, 30);
 		frame.getContentPane().add(confirmButton);
+		
+		JButton resetButton = new JButton("Reset");
+		resetButton.setBounds(110, 200, 100, 30);
+		frame.getContentPane().add(resetButton);
 		
 		frame.setVisible(true);
 
@@ -96,8 +100,18 @@ public class mainGui extends JFrame {
 				
 				isEntered = true;
 				
-				System.out.println(path);
 				main.checkInput();
+			}
+		});
+		
+		resetButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				inputStartNumber.setText("");
+				inputAmount.setText("");
+				inputLink.setText("");
+				inputHeight.setText("250");
+				inputWidth.setText("250");
+				main.reset();
 			}
 		});
 	}
