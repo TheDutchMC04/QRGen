@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class mainGui extends JFrame {
 
-	public static String startNumberValue, amountNumberValue, inputLinkValue;
+	public static String startNumberValue, amountNumberValue, inputLinkValue, path, height, width;
 	public static Boolean isEntered = false;
 		
 	public static void init() {
@@ -32,6 +32,11 @@ public class mainGui extends JFrame {
 		inputStartNumberText.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		inputStartNumberText.setBounds(1, 40, 100, 30);
 		frame.getContentPane().add(inputStartNumberText);
+		
+		JLabel startAtNote = new JLabel("Start at 0 if first one!");
+		startAtNote.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
+		startAtNote.setBounds(170, 40, 300, 30);
+		frame.getContentPane().add(startAtNote);
 
 		JLabel inputAmountText = new JLabel("Amount:");
 		inputAmountText.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
@@ -43,6 +48,15 @@ public class mainGui extends JFrame {
 		inputLinkText.setBounds(1, 120, 100, 30);
 		frame.getContentPane().add(inputLinkText);
 		
+		JLabel inputHeightText = new JLabel("Height:");
+		inputHeightText.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
+		inputHeightText.setBounds(1, 160, 100, 35);
+		frame.getContentPane().add(inputHeightText);
+
+		JLabel inputWidthText = new JLabel("Width:");
+		inputWidthText.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
+		inputWidthText.setBounds(170, 160, 100, 30);
+		frame.getContentPane().add(inputWidthText);
 		
 		//Text Fields
 		JTextField inputStartNumber = new JTextField("");
@@ -56,10 +70,18 @@ public class mainGui extends JFrame {
 		JTextField inputLink = new JTextField("");
 		inputLink.setBounds(100, 124, 300, 30);
 		frame.getContentPane().add(inputLink);
+		
+		JTextField inputHeight = new JTextField("250");
+		inputHeight.setBounds(100, 160, 50, 30);
+		frame.getContentPane().add(inputHeight);
+		
+		JTextField inputWidth = new JTextField("250");
+		inputWidth.setBounds(250, 160, 50, 30);
+		frame.getContentPane().add(inputWidth);
 
 		//Button
 		JButton confirmButton = new JButton("Confirm");
-		confirmButton.setBounds(1, 160, 100, 30);
+		confirmButton.setBounds(1, 200, 100, 30);
 		frame.getContentPane().add(confirmButton);
 		
 		frame.setVisible(true);
@@ -69,9 +91,12 @@ public class mainGui extends JFrame {
 				startNumberValue = inputStartNumber.getText();
 				amountNumberValue = inputAmount.getText();
 				inputLinkValue = inputLink.getText();
+				height = inputHeight.getText();
+				width = inputWidth.getText();
+				
 				isEntered = true;
 				
-				System.out.print(startNumberValue + " " + amountNumberValue + " " + inputLinkValue);
+				System.out.println(path);
 				main.checkInput();
 			}
 		});

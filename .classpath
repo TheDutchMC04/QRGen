@@ -3,5 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="src/main/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobia/Documents/Github/Workspace/QRGen/src/main/core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobia/Documents/Github/Workspace/QRGen/src/main/javase-3.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
